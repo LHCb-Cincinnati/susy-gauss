@@ -1,0 +1,50 @@
+# EventType: 46000214
+#
+# Descriptor: pp -> (~chi_1+ -> ~chi_10  pi+ ' )
+#
+# NickName: DissTracks_100GeV_mAMSB
+#
+# Cuts: DaughtersInLHCb
+#
+# InsertPythonCode: 
+# from Configurables import LoKi__FullGenEventCut
+#       "from GaudiKernel.SystemOfUnits import GeV, mrad, mm, meter"
+#     , "GEVZ                   =  GFAEVX( GVZ, LoKi.Constants.InvalidDistance )"
+#     , "GEVRHO                 =  GFAEVX( GVRHO, LoKi.Constants.HugeDistance )"
+#     , "inAcceptance           = ( GTHETA < 400.*mrad ) & ( GP > 2.0*GeV )"
+#     , "isNeutralino           = ( '~chi_10' == GABSID )"
+#     , "isChargino             = ( '~chi_1+' == GABSID )"
+# from Configurables import GenerationToSimulation 
+# GenerationToSimulation("GenToSim").KeepCode = "( '~chi_1+' == GABSID )" # Keep MCParticles Charginos
+#
+# ### Particle properties
+# spcFileName = "$DECFILESROOT/lhafiles/DissTracks_100GeV_mAMSB.LHspc"
+# specialSusyParticles = [ "1000022","1000024" ]
+#
+# import sys,os
+# sys.path.append(os.path.expandvars("$DECFILESROOT/scripts/"))
+# from SuSySLHAFunctions import getParticlePropertiesAndPythia8Commands
+# pps, ppCommands = getParticlePropertiesAndPythia8Commands(spcFileName, specialSusyParticles)
+#
+# Generation().Special.Pythia8Production.Commands += [
+#       "SLHA:file            %s" % spcFileName
+#     , "SLHA:useDecayTable = true"
+#     ] + ppCommands
+#
+# from Configurables import LHCb__ParticlePropertySvc
+# EndInsertPythonCode
+#
+# ExtraOptions: DissTracks
+# SUSYModel: DissTracks_100GeV_mAMSB
+# 
+# Documentation: DissTracks study test
+# EndDocumentation
+# PhysicsWG: Exotica
+# Email: mohamed.elashri@cern.ch
+# Tested: Yes
+# Responsible: Mohamed elashri
+# Date: 20220606
+#
+End
+#
+#    
