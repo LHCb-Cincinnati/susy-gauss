@@ -1,5 +1,3 @@
-# This is the output which should be correct (to make .dec produce this is still under development)
-
 # file /afs/cern.ch/user/m/melashri/private/susy-sim/GaussDev_v49r21/Gen/DecFiles/options/46000214.py generated: Mon, 06 Jun 2022 14:31:41
 #
 # Event Type: 46000214
@@ -19,13 +17,14 @@ from Configurables import EvtGenDecay
 ToolSvc().addTool( EvtGenDecay )
 ToolSvc().EvtGenDecay.UserDecayFile = "$DECFILESROOT/dkfiles/DissTracks_100GeV_mAMSB.dec"
 Generation().Special.CutTool = ""
-Generation().FullGenEventCutTool = "LoKi::FullGenEventCut/ChiInAcc"
+#Generation().FullGenEventCutTool = "LoKi::FullGenEventCut/ChiInAcc"
 from Gaudi.Configuration import *
-#importOptions( "$DECFILESROOT/options/SusyBRpV.py" )
+importOptions( "$DECFILESROOT/options/susy.py" )
 from Configurables import PythiaProduction
 Generation().Special.addTool( PythiaProduction )
 Generation().Special.PythiaProduction.SLHASpectrumFile = "DissTracks_100GeV_mAMSB.LHspc"
  
+'''
 from Configurables import LoKi__FullGenEventCut
 Generation().addTool( LoKi__FullGenEventCut, "ChiInAcc" )
 GenLevelSelection = Generation().ChiInAcc
@@ -33,20 +32,19 @@ GenLevelSelection.Preambulo += [
       "from GaudiKernel.SystemOfUnits import GeV, mrad, mm, meter"
     , "GEVZ                   =  GFAEVX( GVZ, LoKi.Constants.InvalidDistance )"
     , "GEVRHO                 =  GFAEVX( GVRHO, LoKi.Constants.HugeDistance )"
-    , "inAcceptance           = ( GTHETA < 400.*mrad ) & ( GP > 2.0*GeV )"
-    , "isNeutralino           = ( '~chi_10' == GABSID )"
+    , "inAcceptance     = in_range ( 1.95 , GETA , 5.050 )"
     , "isChargino             = ( '~chi_1+' == GABSID )"
     , "isGood = ( isChargino & inAcceptance & ( GNINTREE( isChargino, HepMC.descendants )== 0 )   )"
 ]
 GenLevelSelection.Code = " count ( isGood ) > 0 "
-
+'''
 from Configurables import GenerationToSimulation 
 GenerationToSimulation("GenToSim").KeepCode = "( '~chi_1+' == GABSID )" # Keep MCParticles Charginos
 
 ### Particle properties
 spcFileName = "$DECFILESROOT/lhafiles/DissTracks_100GeV_mAMSB.LHspc"
-specialSusyParticles = [ "1000022","1000024" ]
-
+#specialSusyParticles = [ "1000022","1000024" ]
+specialSusyParticles = [ "1000022" ]
 import sys,os
 sys.path.append(os.path.expandvars("$DECFILESROOT/scripts/"))
 from SuSySLHAFunctions import getParticlePropertiesAndPythia8Commands

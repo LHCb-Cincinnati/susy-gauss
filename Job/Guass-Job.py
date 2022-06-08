@@ -1,12 +1,11 @@
 from Gauss.Configuration import *
-importOptions("$APPCONFIGOPTS/Gauss/Beam6500GeV-md100-2016-nu1.6.py")
+importOptions("$APPCONFIGOPTS/Gauss/Beam6500GeV-md100-2017-nu1.6.py")
 importOptions("$APPCONFIGOPTS/Gauss/EnableSpillover-25ns.py")
-importOptions("$APPCONFIGOPTS/Gauss/DataType-2016.py")
+importOptions("$APPCONFIGOPTS/Gauss/DataType-2017.py")
 importOptions("$APPCONFIGOPTS/Gauss/RICHRandomHits.py")
 importOptions("$DECFILESROOT/options/46000214.py")
 importOptions("$LBPYTHIA8ROOT/options/Pythia8.py")
-#importOptions("$APPCONFIGOPTS/Gauss/G4PL_FTFP_BERT_EmNoCuts.py")
-
+importOptions("$GAUSSOPTS/GenStandAlone.py")
 
 GaussGen = GenInit("GaussGen")
 GaussGen.FirstEventNumber = 1
